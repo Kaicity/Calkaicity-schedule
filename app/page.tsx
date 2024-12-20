@@ -1,5 +1,16 @@
-import Image from "next/image";
+import { redirect } from "next/navigation";
+import Navbar from "./components/Navbar";
+import { requireUser } from "./lib/hooks";
 
-export default function Home() {
-  return <h1>THONGULAR</h1>;
+export default async function Home() {
+  const session = await requireUser();
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+  return (
+    <div className="max-w mx-auto px-4 sm:px-6 lg:px-8">
+      <Navbar />
+    </div>
+  );
 }

@@ -1,7 +1,11 @@
-import { requireUser } from "../lib/hooks";
+import { requireUser } from '../lib/hooks';
 
 export default async function () {
-  const session = await requireUser();
-
-  return <div className="">DashboardPage</div>;
+  try {
+    const session = await requireUser();
+    return <div>DashboardPage</div>;
+  } catch (error) {
+    console.error('Error loading dashboard:', error);
+    return <div>Error loading dashboard.</div>;
+  }
 }

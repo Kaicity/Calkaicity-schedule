@@ -5,7 +5,7 @@ import Logo from '@/public/logo.png';
 import { DashboardLinks } from '../components/DashboardLinks';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Menu } from 'lucide-react';
+import { Menu, User } from 'lucide-react';
 import { ThemeToggle } from '../components/ThemeToggle';
 import {
   DropdownMenu,
@@ -16,8 +16,9 @@ import {
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
 import { redirect } from 'next/navigation';
-import { auth, signOut } from '../lib/auth';
+import { auth } from '../lib/auth';
 import { SignOut } from '../lib/auth-action';
+import { UserOption } from '../components/UserOption';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const session = await auth();
@@ -73,32 +74,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
             <div className="ml-auto flex items-center gap-x-4">
               <ThemeToggle />
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" size="icon" className="rounded-full">
-                    <Image
-                      src={session?.user?.image as string}
-                      alt="Profile"
-                      width={20}
-                      height={20}
-                      className="w-full h-full rounded-full"
-                    />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href="dashboard/settings">Settings</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <button type="submit" className="w-full text-left" onClick={SignOut}>
-                      Đăng xuất
-                    </button>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <UserOption session={session} SignOut={SignOut} />
             </div>
           </header>
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">{children}</main>

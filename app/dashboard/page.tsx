@@ -1,11 +1,7 @@
-import { requireUser } from '../lib/hooks';
+import { auth } from '../lib/auth';
 
 export default async function () {
-  try {
-    const session = await requireUser();
-    return <div>DashboardPage</div>;
-  } catch (error) {
-    console.error('Error loading dashboard:', error);
-    return <div>Error loading dashboard.</div>;
-  }
+  const session = await auth();
+
+  return <div>DashboardPage</div>;
 }

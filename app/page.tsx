@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 import Navbar from './components/Navbar';
-import { Auth } from './lib/auth-action';
+import { auth } from './lib/auth';
 
 export default async function Home() {
-  const session = await Auth();
+  const session = await auth();
 
   if (session?.user) {
     redirect('/dashboard');

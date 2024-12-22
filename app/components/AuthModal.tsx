@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
-import { DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
-import Image from "next/image";
-import Logo from "@/public/logo.png";
-import { SignInGithub, SignInGoogle } from "../lib/auth-action";
-import { GithubAuthButton, GoogleAuthButton } from "./SubmitButton";
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
+import Image from 'next/image';
+import Logo from '@/public/logo.png';
+import { SignInGithub, SignInGoogle } from '../lib/auth-action';
+import { GithubAuthButton, GoogleAuthButton } from './SubmitButton';
 
 export function AuthModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Try for free</Button>
+        <Button>Bắt đầu ngay</Button>
       </DialogTrigger>
       <DialogContent className="w-[400px]">
         <DialogHeader className="flex flex-row items-center gap-2">

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { useFormStatus } from "react-dom";
-import GoogleIcon from "@/public/google.png";
-import GithubIcon from "@/public/github-dark.png";
-import { Loader2 } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { useFormStatus } from 'react-dom';
+import GoogleIcon from '@/public/google.png';
+import GithubIcon from '@/public/github-dark.png';
+import { Loader2 } from 'lucide-react';
 
 export function GoogleAuthButton() {
   const { pending } = useFormStatus();

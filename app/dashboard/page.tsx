@@ -1,7 +1,7 @@
-import { requireUser } from "../lib/hooks";
+import { auth } from '../lib/auth';
 
 export default async function () {
-  const session = await requireUser();
+  const session = await auth();
 
-  return <div className="">DashboardPage</div>;
+  return <div>DashboardPage</div>;
 }

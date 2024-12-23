@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Image from 'next/image';
 import Link from 'next/link';
+import UserDefault from '@/public/userDefault.webp';
 
 interface UserOptionProps {
   session: any;
@@ -21,11 +22,12 @@ export async function UserOption({ session, SignOut }: UserOptionProps) {
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon" className="rounded-full">
           <Image
-            src={session?.user?.image as string}
+            src={session?.user?.image || UserDefault}
             alt="Profile"
-            width={20}
-            height={20}
-            className="w-full h-full rounded-full"
+            width={80}
+            height={80}
+            quality={100}
+            className="rounded-full object-cover"
           />
         </Button>
       </DropdownMenuTrigger>
@@ -33,7 +35,7 @@ export async function UserOption({ session, SignOut }: UserOptionProps) {
         <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="dashboard/settings">Settings</Link>
+          <Link href="dashboard/settings">Cài đặt</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <button type="submit" className="w-full text-left" onClick={SignOut}>

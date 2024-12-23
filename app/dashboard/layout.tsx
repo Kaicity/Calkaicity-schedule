@@ -3,29 +3,48 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import Logo from '@/public/logo.png';
 import { DashboardLinks } from '../components/DashboardLinks';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { Menu, User } from 'lucide-react';
-import { ThemeToggle } from '../components/ThemeToggle';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu';
-import { redirect } from 'next/navigation';
-import { auth } from '../lib/auth';
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { Menu } from 'lucide-react';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { SignOut } from '../lib/auth-action';
 import { UserOption } from '../components/UserOption';
+import prisma from '../lib/db';
+import { redirect } from 'next/navigation';
+import { requireUser } from '../lib/hooks';
 
-export default async function DashboardLayout({ children }: { children: ReactNode }) {
-  const session = await auth();
+async function getData(userId: string) {
+  const data = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      username: true,
+    },
+  });
 
-  if (!session) {
-    redirect('/');
+  if (!data?.username) {
+    return redirect('/onboarding');
   }
+
+  return data;
+}
+
+export default async function DashboardLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const session = await requireUser();
+
+  const data = await getData(session?.user?.id as string);
 
   return (
     <>
@@ -64,7 +83,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                       Cal<span className="text-primary">kaicity</span>
                     </p>
                   </SheetTitle>
-                  <SheetDescription>Hệ thống phần mềm lập lịch và kế hoạch</SheetDescription>
+                  <SheetDescription>
+                    Hệ thống phần mềm lập lịch và kế hoạch
+                  </SheetDescription>
                 </SheetHeader>
                 <nav className="grid gap-2">
                   <DashboardLinks />
@@ -77,7 +98,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
               <UserOption session={session} SignOut={SignOut} />
             </div>
           </header>
-          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">{children}</main>
+          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+            {children}
+          </main>
         </div>
       </div>
     </>

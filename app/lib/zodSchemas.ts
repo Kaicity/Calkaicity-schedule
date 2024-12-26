@@ -1,6 +1,7 @@
 import { conformZodMessage } from '@conform-to/zod';
 import { z } from 'zod';
 
+// =======================ONBOARDING SCHEMA====================================
 export const onboardingSchema = z.object({
   fullName: z
     .string({ message: 'Tên là bắt buộc' })
@@ -56,3 +57,13 @@ export function onboardingSchemaValidation(options?: {
       .max(150, { message: 'Tên không được vượt quá 150 kí tự' }),
   });
 }
+
+// ==============================SETTING SCHEMA====================================
+export const settingSchema = z.object({
+  fullName: z
+    .string({ message: 'Tên là bắt buộc' })
+    .min(3, { message: 'Tên phải có ít nhất 3 kí tự' })
+    .max(150, { message: 'Tên không được vượt quá 150 kí tự' }),
+
+  profileImage: z.string(),
+});

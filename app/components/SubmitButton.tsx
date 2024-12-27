@@ -28,7 +28,7 @@ export function SubmitButton({ text, variant, className }: isAppProps) {
   return (
     <>
       {pending ? (
-        <Button disabled variant="outline" className="w-full">
+        <Button disabled variant="outline">
           <Loader2 className="size-4 mr-2 animate-spin"></Loader2>
         </Button>
       ) : (

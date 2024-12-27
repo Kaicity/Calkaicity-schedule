@@ -19,6 +19,8 @@ import { SubmitButton } from './SubmitButton';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
+import { UploadDropzone } from '../lib/uploadthing';
+import { toast } from 'sonner';
 
 interface isAppProps {
   fullName: string;
@@ -76,12 +78,18 @@ export function SettingForm({ fullName, email, profileImage }: isAppProps) {
           </div>
           <div className="flex flex-col gap-y-5">
             <Label>Hình ảnh cá nhân</Label>
+            <Input
+              type="hidden"
+              name={fields.profileImage.name}
+              key={fields.profileImage.key}
+              value={currentProfileImage}
+            />
             {currentProfileImage ? (
               <div className="relative size-16">
                 <Image
                   src={currentProfileImage}
                   alt="profileImage"
-                  className="object-cover size-16"
+                  className="object-cover size-16 rounded-md"
                   width={64}
                   height={64}
                 />
@@ -96,8 +104,19 @@ export function SettingForm({ fullName, email, profileImage }: isAppProps) {
                 </Button>
               </div>
             ) : (
-              <h1>Không có hình ảnh</h1>
+              <UploadDropzone
+                onClientUploadComplete={(res) => {
+                  setCurrentProfileImage(res[0].url);
+                  toast.success('Hình ảnh của bạn đã được upload');
+                }}
+                onUploadError={(error) => {
+                  console.log('Đã có lỗi xảy ra khi upload file', error);
+                  toast.error(error.message);
+                }}
+                endpoint="imageUploader"
+              />
             )}
+            <p className="text-red-500 text-sm">{fields.profileImage.errors}</p>
           </div>
         </CardContent>
         <CardFooter>

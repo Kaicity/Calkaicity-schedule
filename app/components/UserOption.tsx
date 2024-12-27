@@ -24,10 +24,10 @@ export async function UserOption({ session, SignOut }: UserOptionProps) {
           <Image
             src={session?.user?.image || UserDefault}
             alt="Profile"
-            width={80}
-            height={80}
+            width={64}
+            height={64}
             quality={100}
-            className="rounded-full object-cover"
+            className="rounded-full size-10 object-cover"
           />
         </Button>
       </DropdownMenuTrigger>

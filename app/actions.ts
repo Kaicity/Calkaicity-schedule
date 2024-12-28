@@ -35,6 +35,47 @@ export async function OnboardingAction(prevState: any, formData: FormData) {
     data: {
       username: submission.value.userName,
       name: submission.value.fullName,
+      availability: {
+        createMany: {
+          data: [
+            {
+              day: 'MONDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'TUESDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'WEDNESDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'THURSDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'FRIDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'SATURDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'SUNDAY',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+          ],
+        },
+      },
     },
   });
 

@@ -96,11 +96,10 @@ export function SettingForm({ fullName, email, profileImage }: isAppProps) {
                 <Button
                   onClick={handleDeleteImage}
                   variant="destructive"
-                  size="icon"
-                  className="absolute -top-3 -right-3"
+                  className="absolute w-4 h-7 -top-3 -right-3 rounded-full"
                   type="button"
                 >
-                  <X className="size-4"></X>
+                  <X className="w-4 h-4"></X>
                 </Button>
               </div>
             ) : (

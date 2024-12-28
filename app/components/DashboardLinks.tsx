@@ -27,8 +27,8 @@ export const dashboardLinks: iAppProps[] = [
   },
   {
     id: 2,
-    name: 'Khả dụng',
-    href: '/dashboard/availablity',
+    name: 'Lịch trình',
+    href: '/dashboard/availability',
     icon: CalendarCheck,
   },
   {

@@ -28,7 +28,7 @@ export function SubmitButton({ text, variant, className }: isAppProps) {
   return (
     <>
       {pending ? (
-        <Button disabled variant="outline">
+        <Button disabled variant="outline" className={cn('w-fit', className)}>
           <Loader2 className="size-4 mr-2 animate-spin"></Loader2>
           Đang xử lý
         </Button>

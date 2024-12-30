@@ -1,3 +1,5 @@
+'use client';
+
 import { SubmitButton } from '@/app/components/SubmitButton';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/ButtonGroup';
@@ -21,8 +23,19 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+import DiscordIcon from '../../../public/discord.png';
+import GoogleMeetIcon from '../../../public/meet.png';
+import MicrosoftTeamsIcon from '../../../public/teams.png';
+import Image from 'next/image';
+import Link from 'next/link';
+
+type VideoCallProvider = 'Discord' | 'Google Meet' | 'Microsoft Teams';
 
 export default function NewEventToute() {
+  const [activePlatform, setActivePlatform] =
+    useState<VideoCallProvider>('Google Meet');
+
   return (
     <div className="w-full h-full flex flex-1 items-center justify-center">
       <Card>
@@ -81,13 +94,52 @@ export default function NewEventToute() {
             <div className="flex flex-col gap-y-2">
               <Label>Trình cung cấp cuộc gọi video</Label>
               <ButtonGroup>
-                <Button>Discord</Button>
-                <Button>Google Meet</Button>
-                <Button>Microsoft Teams</Button>
+                <Button
+                  type="button"
+                  onClick={() => setActivePlatform('Discord')}
+                  className="w-full"
+                  variant={
+                    activePlatform === 'Discord' ? 'secondary' : 'outline'
+                  }
+                >
+                  <Image src={DiscordIcon} alt="" className="size-4 mr-2" />
+                  Discord
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => setActivePlatform('Google Meet')}
+                  className="w-full"
+                  variant={
+                    activePlatform === 'Google Meet' ? 'secondary' : 'outline'
+                  }
+                >
+                  <Image src={GoogleMeetIcon} alt="" className="size-4 mr-2" />
+                  Google Meet
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => setActivePlatform('Microsoft Teams')}
+                  className="w-full"
+                  variant={
+                    activePlatform === 'Microsoft Teams'
+                      ? 'secondary'
+                      : 'outline'
+                  }
+                >
+                  <Image
+                    src={MicrosoftTeamsIcon}
+                    alt=""
+                    className="size-4 mr-2"
+                  />
+                  Microsoft Teams
+                </Button>
               </ButtonGroup>
             </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex items-center justify-between">
+            <Button variant="secondary" asChild>
+              <Link href="/dashboard">Hủy</Link>
+            </Button>
             <SubmitButton text="Tạo sự kiện" />
           </CardFooter>
         </form>

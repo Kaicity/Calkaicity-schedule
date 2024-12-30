@@ -16,6 +16,7 @@ export function ButtonGroup({ className, children }: iAppProps) {
         const isLastItem = index === totalButtons - 1;
 
         return cloneElement(child, {
+          key: index,
           className: cn(
             {
               'rounded-l-none': !isFirstItem,

@@ -23,7 +23,7 @@ import { notFound } from 'next/navigation';
 import { times } from '@/app/lib/times';
 import { SubmitButton } from '@/app/components/SubmitButton';
 import { Input } from '@/components/ui/input';
-import { updateAvailabilityAction } from '@/app/actions';
+import { updateAvailabilityAction } from '@/app/services/availabilityActions';
 
 async function getData(userId: string) {
   const data = await prisma.availability.findMany({

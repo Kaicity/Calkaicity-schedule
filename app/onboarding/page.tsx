@@ -11,11 +11,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useActionState } from 'react';
-import { OnboardingAction } from '../actions';
 import { parseWithZod } from '@conform-to/zod';
 import { useForm } from '@conform-to/react';
 import { onboardingSchema } from '../lib/zodSchemas';
 import { SubmitButton } from '../components/SubmitButton';
+import { OnboardingAction } from '../services/onBoardingActions';
 
 export default function OnboardingRoute() {
   const [lastResult, action] = useActionState(OnboardingAction, undefined);
@@ -38,7 +38,7 @@ export default function OnboardingRoute() {
             <span className="text-primary">kaicity</span>
           </CardTitle>
           <CardDescription>
-            Chúng tôi cần thông tin đầy đủ để cập nhật profile của bạn
+            Chúng tôi cần thông tin đầy đủ để cập nhật tài khoản cá nhân của bạn
           </CardDescription>
         </CardHeader>
         <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
@@ -68,6 +68,17 @@ export default function OnboardingRoute() {
                 />
               </div>
               <p className="text-red-500 text-sm">{fields.userName.errors}</p>
+            </div>
+
+            <div className="grid gap-y-2">
+              <Label>Số điện thoại</Label>
+              <Input
+                name={fields?.phone.name}
+                defaultValue={fields.phone.initialValue}
+                key={fields.phone.key}
+                placeholder="0703338458"
+              />
+              <p className="text-red-500 text-sm">{fields.phone.errors}</p>
             </div>
           </CardContent>
           <CardFooter>

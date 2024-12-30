@@ -15,13 +15,13 @@ interface iAppProps {
 export const dashboardLinks: iAppProps[] = [
   {
     id: 0,
-    name: 'Loại sự kiện',
+    name: 'Sự kiện',
     href: '/dashboard',
     icon: HomeIcon,
   },
   {
     id: 1,
-    name: 'Các cuộc họp',
+    name: 'Cuộc họp',
     href: '/dashboard/meetings',
     icon: User2,
   },

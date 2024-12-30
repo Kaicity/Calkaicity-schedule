@@ -23,7 +23,7 @@ import { notFound } from 'next/navigation';
 import { times } from '@/app/lib/times';
 import { SubmitButton } from '@/app/components/SubmitButton';
 import { Input } from '@/components/ui/input';
-import { updateAvailabilityAction } from '@/app/actions';
+import { updateAvailabilityAction } from '@/app/services/availabilityActions';
 
 async function getData(userId: string) {
   const data = await prisma.availability.findMany({
@@ -54,8 +54,11 @@ export default async function AvailabilityRoute() {
       <form action={updateAvailabilityAction}>
         <CardContent className="flex flex-col gap-y-4">
           {data.map((item) => (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
-              <div key={item.id} className="flex items-center gap-x-3">
+            <div
+              key={item.id}
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4"
+            >
+              <div className="flex items-center gap-x-3">
                 <Input type="hidden" name={`id-${item.id}`} value={item.id} />
                 <Switch
                   name={`isActive-${item.id}`}

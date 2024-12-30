@@ -16,11 +16,14 @@ model User {
   emailVerified DateTime?
   image         String?
   username      String?         @unique
+  phoneNumber   String?
+  birthday      String?
   grantId       String?
   grantEmail    String?
   accounts      Account[]
   sessions      Session[]
   availability Availability[]
+  eventType    EventType[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -75,8 +78,8 @@ model Availability {
   userId String
   user User @relation(fields: [userId], references: [id])
 
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
  
 enum Day {
@@ -87,4 +90,18 @@ enum Day {
   FRIDAY
   SATURDAY
   SUNDAY
+}
+
+model EventType {
+  id String @id @default(uuid())
+  title String
+  duration Int
+  url String
+  description String
+  active Boolean @default(true)
+  videoCallSoftware String @default("Google Meet")
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
 }

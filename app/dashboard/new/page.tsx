@@ -23,18 +23,36 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { useState } from 'react';
+import { useActionState, useState } from 'react';
 import DiscordIcon from '../../../public/discord.png';
 import GoogleMeetIcon from '../../../public/meet.png';
 import MicrosoftTeamsIcon from '../../../public/teams.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CreateEventTypeAction } from '@/app/services/eventTypeActions';
+import { useForm } from '@conform-to/react';
+import { parseWithZod } from '@conform-to/zod';
+import { eventTypesSchema } from '@/app/lib/zodSchemas';
 
 type VideoCallProvider = 'Discord' | 'Google Meet' | 'Microsoft Teams';
 
 export default function NewEventToute() {
   const [activePlatform, setActivePlatform] =
     useState<VideoCallProvider>('Google Meet');
+
+  const [lastResult, action] = useActionState(CreateEventTypeAction, undefined);
+  const [form, fields] = useForm({
+    lastResult,
+
+    onValidate({ formData }) {
+      return parseWithZod(formData, {
+        schema: eventTypesSchema,
+      });
+    },
+
+    shouldValidate: 'onBlur',
+    shouldRevalidate: 'onInput',
+  });
 
   return (
     <div className="w-full h-full flex flex-1 items-center justify-center">
@@ -45,11 +63,17 @@ export default function NewEventToute() {
             Tạo cuộc hẹn cho phép mọi người đặt lịch hẹn với bạn
           </CardDescription>
         </CardHeader>
-        <form>
+        <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
           <CardContent className="grid gap-y-5">
             <div className="flex flex-col gap-y-2">
               <Label>Tiêu đề</Label>
-              <Input placeholder="Cuộc họp 30 phút" />
+              <Input
+                name={fields.title.name}
+                key={fields.title.key}
+                defaultValue={fields.title.initialValue}
+                placeholder="Cuộc họp 30 phút"
+              />
+              <div className="text-red-500 text-sm">{fields.title.errors}</div>
             </div>
 
             <div className="flex flex-col gap-y-2">
@@ -59,23 +83,36 @@ export default function NewEventToute() {
                   Thongular.com/
                 </span>
                 <Input
-                  //   name={fields?.userName.name}
-                  //   defaultValue={fields.userName.initialValue}
-                  //   key={fields.userName.key}
+                  name={fields.url.name}
+                  defaultValue={fields.url.initialValue}
+                  key={fields.url.key}
                   placeholder="thongular-162002"
                   className="rounded-l-none"
                 />
               </div>
+              <div className="text-red-500 text-sm">{fields.url.errors}</div>
             </div>
 
             <div className="flex flex-col gap-y-2">
               <Label>Mô tả</Label>
-              <Textarea placeholder="Cuộc họp thảo luận về quản lý dự án" />
+              <Textarea
+                placeholder="Cuộc họp thảo luận về quản lý dự án"
+                name={fields.description.name}
+                key={fields.description.key}
+                defaultValue={fields.description.initialValue}
+              />
+              <div className="text-red-500 text-sm">
+                {fields.description.errors}
+              </div>
             </div>
 
             <div className="flex flex-col gap-y-2">
               <Label>Khoảng thời gian</Label>
-              <Select>
+              <Select
+                name={fields.duration.name}
+                key={fields.duration.key}
+                defaultValue={fields.duration.initialValue}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Chọn khoảng thời gian" />
                 </SelectTrigger>
@@ -89,10 +126,18 @@ export default function NewEventToute() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+              <div className="text-red-500 text-sm">
+                {fields.duration.errors}
+              </div>
             </div>
 
             <div className="flex flex-col gap-y-2">
               <Label>Trình cung cấp cuộc gọi video</Label>
+              <Input
+                type="hidden"
+                name={fields.videoCallSoftware.name}
+                value={activePlatform}
+              />
               <ButtonGroup>
                 <Button
                   type="button"
@@ -134,6 +179,9 @@ export default function NewEventToute() {
                   Microsoft Teams
                 </Button>
               </ButtonGroup>
+              <div className="text-red-500 text-sm">
+                {fields.videoCallSoftware.errors}
+              </div>
             </div>
           </CardContent>
           <CardFooter className="flex items-center justify-between">

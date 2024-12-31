@@ -87,3 +87,26 @@ export const settingSchema = z.object({
 
   birth: z.string().optional(),
 });
+
+//===============================EVENT-TYPE SCHEMA==================================
+export const eventTypesSchema = z.object({
+  title: z
+    .string({ message: 'Tiêu đề là bắt buộc' })
+    .min(3, { message: 'Tiêu đề phải có ít nhất 3 kí tự' })
+    .max(150, { message: 'Tiêu đề không được vượt quá 150 kí tự' }),
+  duration: z
+    .number({ message: 'Khoảng thời gian là bắt buộc' })
+    .min(15, { message: 'Khoảng thời gian phải có ít nhất 3 kí tự' })
+    .max(60, { message: 'Khoảng thời gian không được vượt quá 60 kí tự' }),
+  url: z
+    .string({ message: 'Đường dẫn là bắt buộc' })
+    .min(3, { message: 'Đường dẫn phải có ít nhất 3 kí tự' })
+    .max(150, { message: 'Đường dẫn không được vượt quá 150 tự' }),
+  description: z
+    .string({ message: 'Mô tả là bắt buộc' })
+    .min(3, { message: 'Mô tả phải có ít nhất 3 kí tự' })
+    .max(300, { message: 'Mô tả không được vượt quá 300 kí tự' }),
+  videoCallSoftware: z
+    .string({ message: 'Trình cấp video call là bắt buộc' })
+    .min(3, { message: 'Trình cấp video call phải có ít nhất 3 kí tự' }),
+});

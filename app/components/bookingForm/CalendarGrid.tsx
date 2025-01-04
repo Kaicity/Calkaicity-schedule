@@ -6,6 +6,7 @@ import {
 } from '@internationalized/date';
 import { CalendarState } from 'react-stately';
 import { CalendarCell } from './CalendarCell';
+import { DayBookingForm } from '@/app/utils/bookingDayFormEnum';
 
 export function CalendarGrid({
   state,
@@ -36,7 +37,9 @@ export function CalendarGrid({
       <thead {...headerProps} className="text-sm font-medium">
         <tr>
           {weekDays.map((day, index) => (
-            <th key={index}>{day}</th>
+            <th key={index}>
+              {DayBookingForm[day as keyof typeof DayBookingForm]}
+            </th>
           ))}
         </tr>
       </thead>

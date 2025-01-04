@@ -17,7 +17,13 @@ export function CalendarHeader({
   prevButtonProps: AriaButtonProps<'button'>;
   nextButtonProps: AriaButtonProps<'button'>;
 }) {
-  const monthDateFormatter = useDateFormatter({
+  // const monthDateFormatter = useDateFormatter({
+  //   month: 'short',
+  //   year: 'numeric',
+  //   timeZone: state.timeZone,
+  // });
+
+  const monthDateFormatter = Intl.DateTimeFormat('vi-VN', {
     month: 'short',
     year: 'numeric',
     timeZone: state.timeZone,

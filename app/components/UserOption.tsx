@@ -35,7 +35,7 @@ export async function UserOption({ session, SignOut }: UserOptionProps) {
         <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="dashboard/settings">Cài đặt</Link>
+          <Link href="/dashboard/settings">Cài đặt</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <button type="submit" className="w-full text-left" onClick={SignOut}>

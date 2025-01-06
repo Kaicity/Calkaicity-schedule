@@ -79,7 +79,7 @@ export default async function () {
             </Button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.eventType.map((item) => (
               <div
                 className="overflow-hidden shadow rounded-lg border relative"

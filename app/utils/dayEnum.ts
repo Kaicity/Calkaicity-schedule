@@ -1,21 +1,21 @@
 export enum Day {
-  MONDAY = 'MONDAY',
-  TUESDAY = 'TUESDAY',
-  WEDNESDAY = 'WEDNESDAY',
-  THURSDAY = 'THURSDAY',
-  FRIDAY = 'FRIDAY',
-  SATURDAY = 'SATURDAY',
-  SUNDAY = 'SUNDAY',
+  Monday = 'Monday',
+  Tuesday = 'Tuesday',
+  Wednesday = 'Wednesday',
+  Thursday = 'Thursday',
+  Friday = 'Friday',
+  Saturday = 'Saturday',
+  Sunday = 'Sunday',
 }
 
 export const DayTranslations: Record<Day, string> = {
-  [Day.MONDAY]: 'Thứ Hai',
-  [Day.TUESDAY]: 'Thứ Ba',
-  [Day.WEDNESDAY]: 'Thứ Tư',
-  [Day.THURSDAY]: 'Thứ Năm',
-  [Day.FRIDAY]: 'Thứ Sáu',
-  [Day.SATURDAY]: 'Thứ Bảy',
-  [Day.SUNDAY]: 'Chủ Nhật',
+  [Day.Monday]: 'Thứ Hai',
+  [Day.Tuesday]: 'Thứ Ba',
+  [Day.Wednesday]: 'Thứ Tư',
+  [Day.Thursday]: 'Thứ Năm',
+  [Day.Friday]: 'Thứ Sáu',
+  [Day.Saturday]: 'Thứ Bảy',
+  [Day.Sunday]: 'Chủ Nhật',
 };
 
 export const displayFormatDays = (day: Day): string => {

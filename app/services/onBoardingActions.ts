@@ -40,37 +40,37 @@ export async function OnboardingAction(prevState: any, formData: FormData) {
         createMany: {
           data: [
             {
-              day: 'MONDAY',
+              day: 'Monday',
               fromTime: '08:00',
               tillTime: '18:00',
             },
             {
-              day: 'TUESDAY',
+              day: 'Tuesday',
               fromTime: '08:00',
               tillTime: '18:00',
             },
             {
-              day: 'WEDNESDAY',
+              day: 'Wednesday',
               fromTime: '08:00',
               tillTime: '18:00',
             },
             {
-              day: 'THURSDAY',
+              day: 'Thursday',
               fromTime: '08:00',
               tillTime: '18:00',
             },
             {
-              day: 'FRIDAY',
+              day: 'Friday',
               fromTime: '08:00',
               tillTime: '18:00',
             },
             {
-              day: 'SATURDAY',
+              day: 'Saturday',
               fromTime: '08:00',
               tillTime: '18:00',
             },
             {
-              day: 'SUNDAY',
+              day: 'Sunday',
               fromTime: '08:00',
               tillTime: '18:00',
             },

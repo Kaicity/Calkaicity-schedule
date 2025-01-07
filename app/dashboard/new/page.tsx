@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useActionState, useState } from 'react';
-import DiscordIcon from '../../../public/discord.png';
+import ZoomIcon from '../../../public/zoom.png';
 import GoogleMeetIcon from '../../../public/meet.png';
 import MicrosoftTeamsIcon from '../../../public/teams.png';
 import Image from 'next/image';
@@ -34,7 +34,7 @@ import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { eventTypesSchema } from '@/app/lib/zodSchemas';
 
-type VideoCallProvider = 'Discord' | 'Google Meet' | 'Microsoft Teams';
+type VideoCallProvider = 'Zoom Meeting' | 'Google Meet' | 'Microsoft Teams';
 
 export default function NewEventToute() {
   const [activePlatform, setActivePlatform] =
@@ -141,14 +141,14 @@ export default function NewEventToute() {
               <ButtonGroup>
                 <Button
                   type="button"
-                  onClick={() => setActivePlatform('Discord')}
+                  onClick={() => setActivePlatform('Zoom Meeting')}
                   className="w-full"
                   variant={
-                    activePlatform === 'Discord' ? 'secondary' : 'outline'
+                    activePlatform === 'Zoom Meeting' ? 'secondary' : 'outline'
                   }
                 >
-                  <Image src={DiscordIcon} alt="" className="size-4 mr-2" />
-                  Discord
+                  <Image src={ZoomIcon} alt="" className="size-4 mr-2" />
+                  Zoom
                 </Button>
                 <Button
                   type="button"

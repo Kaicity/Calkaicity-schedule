@@ -1,7 +1,12 @@
 import { RenderCalendar } from '@/app/components/bookingForm/RenderCalendar';
 import { TimeTable } from '@/app/components/bookingForm/TimeTable';
+import { SubmitButton } from '@/app/components/SubmitButton';
 import prisma from '@/app/lib/db';
+import { CreateMeetingAction } from '@/app/services/eventTypeActions';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { CalendarX2, Clock, VideoIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -108,8 +113,37 @@ export default async function BookingFormRoute({
             </div>
             <Separator orientation="vertical" className="h-full w-[1px]" />
 
-            <form>
-              <p>form</p>
+            <form
+              className="flex flex-col gap-y-4"
+              action={CreateMeetingAction}
+            >
+              <input type="hidden" name="fromTime" value={searchParams.time} />
+
+              <input type="hidden" name="eventDate" value={searchParams.date} />
+
+              <input type="hidden" name="meetingLength" value={data.duration} />
+
+              <input
+                type="hidden"
+                name="provider"
+                value={data.videoCallSoftware}
+              />
+
+              <input type="hidden" name="username" value={params.username} />
+
+              <input type="hidden" name="eventTypeId" value={data.id} />
+
+              <div className="flex flex-col gap-y-2">
+                <Label>Tên của bạn</Label>
+                <Input name="name" placeholder="Tên của bạn" />
+              </div>
+
+              <div className="flex flex-col gap-y-2">
+                <Label>Email của bạn</Label>
+                <Input name="email" placeholder="nguyenvana@gmail.com" />
+              </div>
+
+              <SubmitButton text="Đặt lịch hẹn" className="w-full mt-5" />
             </form>
           </CardContent>
         </Card>

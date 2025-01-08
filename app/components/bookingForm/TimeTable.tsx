@@ -69,24 +69,24 @@ function calculateAvailableTimeSlots(
   nylasData: NylasResponse<GetFreeBusyResponse[]>,
   duration: number,
 ) {
-  const now = new Date();
+  const now = new Date(); // Get the current time
 
+  // Convert DB availability to Date objects
   const availableFrom = parse(
     `${date} ${dbAvailability.fromTime}`,
     'yyyy-MM-dd HH:mm',
     new Date(),
   );
-
   const availableTill = parse(
     `${date} ${dbAvailability.tillTime}`,
     'yyyy-MM-dd HH:mm',
     new Date(),
   );
 
-  const busySlots = nylasData.data[0].timeSlots.map((slot: any) => {
-    start: fromUnixTime(slot.startTime);
-    end: fromUnixTime(slot.endTime);
-  });
+  const busySlots = nylasData.data[0].timeSlots.map((slot: any) => ({
+    start: fromUnixTime(slot.startTime),
+    end: fromUnixTime(slot.endTime),
+  }));
 
   const allSlots = [];
   let currentSlot = availableFrom;
@@ -97,7 +97,6 @@ function calculateAvailableTimeSlots(
 
   const freeSlots = allSlots.filter((slot) => {
     const slotEnd = addMinutes(slot, duration);
-
     return (
       isAfter(slot, now) && // Ensure the slot is after the current time
       !busySlots.some(
@@ -109,9 +108,7 @@ function calculateAvailableTimeSlots(
     );
   });
 
-  return freeSlots.map((slot) => {
-    return format(slot, 'HH:mm');
-  });
+  return freeSlots.map((slot) => format(slot, 'HH:mm'));
 }
 
 interface iAppProps {

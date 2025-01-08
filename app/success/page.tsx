@@ -14,7 +14,7 @@ export default function SuccessRoute() {
           <h1 className="text-2xl font-semibold mt-4">
             Sự kiện này đã được lên lịch
           </h1>
-          <p className="text-sm text-muted-foreground text-center mt-1">
+          <p className="text-sm text-muted-foreground text-center mt-2  ">
             Chúng tôi đã gửi đến email của bạn với chi tiết tất cả sự kiện qua
             cuộc gọi video
           </p>

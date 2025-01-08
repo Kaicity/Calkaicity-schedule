@@ -68,10 +68,14 @@ export async function CreateMeetingAction(formData: FormData) {
   const meetingLength = Number(formData.get('meetingLength'));
   const provider = formData.get('provider') as string;
 
+  console.log(fromTime);
+
   const startDateTime = new Date(`${eventDate}T${fromTime}:00`);
-  startDateTime.setHours(startDateTime.getHours() + 7); // Gio UTC + 7 VIET NAM
+  // startDateTime.setHours(startDateTime.getHours() + 7); // Gio UTC + 7 VIET NAM
 
   const endDateTime = new Date(startDateTime.getTime() + meetingLength * 60000);
+
+  console.log({ start: startDateTime, end: endDateTime });
 
   await nylas.events.create({
     identifier: getUserData?.grantId as string,

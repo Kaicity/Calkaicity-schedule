@@ -58,9 +58,9 @@ export default function NewEventToute() {
     <div className="w-full h-full flex flex-1 items-center justify-center">
       <Card>
         <CardHeader>
-          <CardTitle>Thêm cuộc hẹn mới</CardTitle>
+          <CardTitle>Tạo sự kiện mới</CardTitle>
           <CardDescription>
-            Tạo cuộc hẹn cho phép mọi người đặt lịch hẹn với bạn
+            Tạo cuộc hẹn cho phép bạn đặt lịch hẹn với người khác
           </CardDescription>
         </CardHeader>
         <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>

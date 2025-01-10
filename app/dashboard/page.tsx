@@ -52,7 +52,7 @@ async function getData(userId: string) {
   return data;
 }
 
-export default async function () {
+export default async function Dashboard() {
   const session = await requireUser();
   const data = await getData(session.user?.id as string);
 

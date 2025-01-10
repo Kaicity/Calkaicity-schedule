@@ -60,9 +60,7 @@ export default async function MeetingRoute() {
         <Card>
           <CardHeader>
             <CardTitle>Các cuộc họp</CardTitle>
-            <CardDescription>
-              Xem các sự kiến dự kiến đã được lên lịch.
-            </CardDescription>
+            <CardDescription>Xem các sự kiến dự kiến đã được lên lịch.</CardDescription>
           </CardHeader>
           <CardContent>
             {data.data.map((item) => (
@@ -72,17 +70,16 @@ export default async function MeetingRoute() {
                 <div className="grid grid-cols-3 justify-between items-center">
                   <div className="">
                     <p className="text-sm text-muted-foreground">
-                      {format(
-                        fromUnixTime(item.when.startTime),
-                        'EEE, dd MMM',
-                        {
-                          locale: vi,
-                        },
-                      )}
+                      {/* @ts-ignore */}
+                      {format(fromUnixTime(item.when.startTime), 'EEE, dd MMM', {
+                        locale: vi,
+                      })}
                     </p>
 
                     <p className="text-xs text-muted-foreground pt-1">
+                      {/* @ts-ignore */}
                       {format(fromUnixTime(item.when.startTime), 'hh:mm a')} -{' '}
+                      {/* @ts-ignore */}
                       {format(fromUnixTime(item.when.endTime), 'hh:mm a')}
                     </p>
 
@@ -91,6 +88,7 @@ export default async function MeetingRoute() {
                         <>
                           <Link className="size-4 text-primary mr-2" />
                           <a
+                            // @ts-ignore
                             href={item?.textDescription}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -103,6 +101,7 @@ export default async function MeetingRoute() {
                         <>
                           <Video className="size-4 text-primary mr-2" />
                           <a
+                            //  @ts-ignore
                             href={item.conferencing.details?.url}
                             target="_blank"
                             rel="noopener noreferrer"

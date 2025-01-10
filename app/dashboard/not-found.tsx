@@ -1,20 +1,21 @@
+import Link from 'next/link';
 import React from 'react';
 
 const NotFoundPage = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-gray-800">404</h1>
-        <p className="text-2xl text-gray-600 mt-4">Page Not Found</p>
-        <p className="text-gray-500 mt-2">
-          Sorry, the page you are looking for does not exist.
+        <h1 className="text-6xl font-bold text-red-500">404</h1>
+        <p className="text-2xl mt-4">Trang Không được tìm thấy</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Xin lỗi, chúng tôi không tìm thấy trang này
         </p>
-        <a
+        <Link
           href="/"
-          className="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700"
+          className="mt-6 inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/70"
         >
-          Go to Home
-        </a>
+          Quay lại trang chủ
+        </Link>
       </div>
     </div>
   );

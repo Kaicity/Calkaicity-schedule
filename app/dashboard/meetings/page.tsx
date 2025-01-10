@@ -14,7 +14,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { format, fromUnixTime } from 'date-fns';
 import { vi } from 'date-fns/locale';
-import { Video } from 'lucide-react';
+import { Link, Video } from 'lucide-react';
 
 async function getData(userId: string) {
   const userData = await prisma.user.findUnique({
@@ -45,7 +45,7 @@ export default async function MeetingRoute() {
   const session = await requireUser();
   const data = await getData(session.user?.id as string);
 
-  console.log(data.data[0]);
+  // console.log(data.data[0]);
 
   return (
     <div className="">
@@ -66,7 +66,7 @@ export default async function MeetingRoute() {
           </CardHeader>
           <CardContent>
             {data.data.map((item) => (
-              <form action={cancelMeetingAction}>
+              <form action={cancelMeetingAction} key={item.id}>
                 <input type="hidden" name="eventId" value={item.id} />
 
                 <div className="grid grid-cols-3 justify-between items-center">
@@ -87,22 +87,38 @@ export default async function MeetingRoute() {
                     </p>
 
                     <div className="flex items-center mt-1">
-                      <Video className="size-4 text-primary mr-2" />
-                      <a
-                        href={item.conferencing.details.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-primary underline underline-offset-4"
-                      >
-                        Tham gia
-                      </a>
+                      {item.conferencing ? (
+                        <>
+                          <Link className="size-4 text-primary mr-2" />
+                          <a
+                            href={item?.textDescription}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-primary underline underline-offset-4 cursor-pointer"
+                          >
+                            Xem chi tiết
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          <Video className="size-4 text-primary mr-2" />
+                          <a
+                            href={item.conferencing.details?.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-primary underline underline-offset-4"
+                          >
+                            Tham gia
+                          </a>
+                        </>
+                      )}
                     </div>
                   </div>
 
                   <div className="flex flex-col items-start">
                     <h2 className="text-sm font-medium">{item.title}</h2>
                     <p className="text-sm text-muted-foreground">
-                      {item.participants[0].name}
+                      {item.participants[0]?.name}
                     </p>
                   </div>
 

@@ -3,7 +3,6 @@ import { TimeTable } from '@/app/components/bookingForm/TimeTable';
 import { SubmitButton } from '@/app/components/SubmitButton';
 import prisma from '@/app/lib/db';
 import { CreateMeetingAction } from '@/app/services/eventTypeActions';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -68,7 +67,7 @@ export default async function BookingFormRoute({
   const showForm = !!searchParams.date && searchParams.time;
 
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center">
+    <div className="min-h-screen w-full flex items-center justify-center">
       {showForm ? (
         <Card className="max-w-[600px] w-full mx-auto">
           <CardContent className="p-5 md:grid md:grid-cols-[1fr,auto,1fr] gap-4">
@@ -135,12 +134,17 @@ export default async function BookingFormRoute({
 
               <div className="flex flex-col gap-y-2">
                 <Label>Tên của bạn</Label>
-                <Input name="name" placeholder="Tên của bạn" />
+                <Input required name="name" placeholder="Tên của bạn" />
               </div>
 
               <div className="flex flex-col gap-y-2">
                 <Label>Email của bạn</Label>
-                <Input name="email" placeholder="nguyenvana@gmail.com" />
+                <Input
+                  required
+                  type="email"
+                  name="email"
+                  placeholder="nguyenvana@gmail.com"
+                />
               </div>
 
               <SubmitButton text="Đặt lịch hẹn" className="w-full mt-5" />

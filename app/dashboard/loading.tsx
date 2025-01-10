@@ -4,7 +4,7 @@ import LoadingAnimate from '../../public/loading-animate.gif';
 export default function Loading() {
   return (
     <div className="w-full h-full flex flex-1 items-center justify-center">
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center">
         <Image
           src={LoadingAnimate}
           alt="loading..."
@@ -13,7 +13,7 @@ export default function Loading() {
           className="size-16"
         />
         <p className="text-sm text-muted-foreground font-medium">
-          Chờ xử lý...
+          Đang tải dữ liệu...
         </p>
       </div>
     </div>

@@ -41,6 +41,25 @@ export function SubmitButton({ text, variant, className }: isAppProps) {
   );
 }
 
+export function DeleteButton({ text, variant, className }: isAppProps) {
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      {pending ? (
+        <Button disabled variant={variant} className={cn('w-fit', className)}>
+          <Loader2 className="size-4 mr-2 animate-spin"></Loader2>
+          Đang xử lý
+        </Button>
+      ) : (
+        <Button className={cn('w-fit', className)} variant={variant}>
+          {text}
+        </Button>
+      )}
+    </>
+  );
+}
+
 export function GoogleAuthButton() {
   const { pending } = useFormStatus();
 

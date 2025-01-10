@@ -5,15 +5,13 @@ import { EmptyState } from '../components/EmptyState';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
-  Delete,
   Edit,
   ExternalLink,
-  Link2,
   Pen,
+  PlusCircle,
   Settings,
   Users2,
 } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +22,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { CopyLinkMenuItem } from '../components/CopyLinkMenu';
+import { MenuActiveSwitch } from '../components/EventTypeSwitcher';
+import { ActionModalDialog } from '../components/ActionModal';
+import { DeleteEventTypeAction } from '../services/eventTypeActions';
 
 async function getData(userId: string) {
   const data = await prisma.user.findUnique({
@@ -76,7 +77,8 @@ export default async function () {
               </p>
             </div>
             <Button>
-              <Link href="/dashboard/new">Tạo mới sự kiện</Link>
+              <PlusCircle />
+              <Link href="/dashboard/new">Tạo sự kiện</Link>
             </Button>
           </div>
 
@@ -106,14 +108,14 @@ export default async function () {
                         <CopyLinkMenuItem
                           meetingUrl={`${process.env.NEXT_PUBLIC_URL}/${data.username}/${item.url}`}
                         />
-                        <DropdownMenuItem>
-                          <Pen className="mr-2 size-4" />
-                          Chỉnh sửa
+                        <DropdownMenuItem asChild>
+                          <Link href={`/dashboard/event/${item.id}`}>
+                            <Pen className="mr-2 size-4" />
+                            Chỉnh sửa
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Delete className="mr-2 size-4" />
-                          Xóa
-                        </DropdownMenuItem>
+                        {/* Delete event */}
+                        <ActionModalDialog eventTypeId={item.id} />
                       </DropdownMenuGroup>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -134,10 +136,15 @@ export default async function () {
                   </div>
                 </Link>
                 <div className="bg-muted px-5 py-3 flex items-center justify-between">
-                  <Switch />
-                  <Button>
-                    <Edit />
-                    Chỉnh sửa
+                  <MenuActiveSwitch
+                    initalChecked={item.active}
+                    eventTypeId={item.id}
+                  />
+                  <Button asChild>
+                    <Link href={`/dashboard/event/${item.id}`}>
+                      <Edit />
+                      Chỉnh sửa
+                    </Link>
                   </Button>
                 </div>
               </div>

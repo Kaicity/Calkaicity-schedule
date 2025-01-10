@@ -1,0 +1,15 @@
+Resources used:
+Next.js: https://nextjs.org
+Nylas: https://rebrand.ly/Nylas-Jan
+Tailwind.css: https://tailwindcss.com
+Shadcn/UI: https://ui.shadcn.com
+Prisma: https://prisma.io
+Supabase: https://supabase.com/
+Uploadthing: https://uploadthing.com/
+Conform: https://conform.guide/
+Vercel: https://vercel.com/
+React-Spectrum: https://react-spectrum.adobe.com/reac...
+Zod: https://zod.dev/
+Conform: https://conform.guide/
+Authjs: https://authjs.dev/
+Google Cloud Console: https://console.cloud.google.com/

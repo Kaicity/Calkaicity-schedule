@@ -135,12 +135,17 @@ export default async function BookingFormRoute({
 
               <div className="flex flex-col gap-y-2">
                 <Label>Tên của bạn</Label>
-                <Input name="name" placeholder="Tên của bạn" />
+                <Input required name="name" placeholder="Tên của bạn" />
               </div>
 
               <div className="flex flex-col gap-y-2">
                 <Label>Email của bạn</Label>
-                <Input name="email" placeholder="nguyenvana@gmail.com" />
+                <Input
+                  required
+                  type="email"
+                  name="email"
+                  placeholder="nguyenvana@gmail.com"
+                />
               </div>
 
               <SubmitButton text="Đặt lịch hẹn" className="w-full mt-5" />

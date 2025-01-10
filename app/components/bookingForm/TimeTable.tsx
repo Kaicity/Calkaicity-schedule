@@ -159,7 +159,7 @@ export async function TimeTable({
             </Link>
           ))
         ) : (
-          <p>not time available</p>
+          <p>Không có thời gian khả dụng</p>
         )}
       </div>
     </div>

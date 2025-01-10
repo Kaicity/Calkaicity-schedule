@@ -68,7 +68,7 @@ export default async function BookingFormRoute({
   const showForm = !!searchParams.date && searchParams.time;
 
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center">
+    <div className="min-h-screen w-full flex items-center justify-center">
       {showForm ? (
         <Card className="max-w-[600px] w-full mx-auto">
           <CardContent className="p-5 md:grid md:grid-cols-[1fr,auto,1fr] gap-4">

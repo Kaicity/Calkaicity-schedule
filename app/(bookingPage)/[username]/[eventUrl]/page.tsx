@@ -11,7 +11,7 @@ import { CalendarX2, Clock, VideoIcon } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-export async function getData(eventUrl: string, userName: string) {
+async function getData(eventUrl: string, userName: string) {
   const data = await prisma.eventType.findFirst({
     where: {
       url: eventUrl,
@@ -54,9 +54,7 @@ export default async function BookingFormRoute({
 }) {
   const data = await getData(params.eventUrl, params.username);
 
-  const selectedDate = searchParams.date
-    ? new Date(searchParams.date)
-    : new Date();
+  const selectedDate = searchParams.date ? new Date(searchParams.date) : new Date();
 
   const formattedDate = new Intl.DateTimeFormat('vi-VN', {
     weekday: 'long',
@@ -112,21 +110,14 @@ export default async function BookingFormRoute({
             </div>
             <Separator orientation="vertical" className="h-full w-[1px]" />
 
-            <form
-              className="flex flex-col gap-y-4"
-              action={CreateMeetingAction}
-            >
+            <form className="flex flex-col gap-y-4" action={CreateMeetingAction}>
               <input type="hidden" name="fromTime" value={searchParams.time} />
 
               <input type="hidden" name="eventDate" value={searchParams.date} />
 
               <input type="hidden" name="meetingLength" value={data.duration} />
 
-              <input
-                type="hidden"
-                name="provider"
-                value={data.videoCallSoftware}
-              />
+              <input type="hidden" name="provider" value={data.videoCallSoftware} />
 
               <input type="hidden" name="username" value={params.username} />
 

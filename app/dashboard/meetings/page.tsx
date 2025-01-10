@@ -84,20 +84,8 @@ export default async function MeetingRoute() {
                     </p>
 
                     <div className="flex items-center mt-1">
-                      {item.conferencing ? (
-                        <>
-                          <Link className="size-4 text-primary mr-2" />
-                          <a
-                            // @ts-ignore
-                            href={item?.textDescription}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-primary underline underline-offset-4 cursor-pointer"
-                          >
-                            Xem chi tiết
-                          </a>
-                        </>
-                      ) : (
+                      {/*  @ts-ignore */}
+                      {item.conferencing.details ? (
                         <>
                           <Video className="size-4 text-primary mr-2" />
                           <a
@@ -108,6 +96,19 @@ export default async function MeetingRoute() {
                             className="text-xs text-primary underline underline-offset-4"
                           >
                             Tham gia
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          <Link className="size-4 text-primary mr-2" />
+                          <a
+                            // @ts-ignore
+                            href={item?.textDescription}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-primary underline underline-offset-4 cursor-pointer"
+                          >
+                            Xem chi tiết
                           </a>
                         </>
                       )}

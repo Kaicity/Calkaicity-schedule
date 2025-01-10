@@ -49,12 +49,15 @@ export default async function BookingFormRoute({
   params,
   searchParams,
 }: {
-  params: { username: string; eventUrl: string };
-  searchParams: { date?: string; time?: string };
+  params: Promise<{ username: string; eventUrl: string }>;
+  searchParams: Promise<{ date?: string; time?: string }>;
 }) {
-  const data = await getData(params.eventUrl, params.username);
+  const { username, eventUrl } = await params;
+  const { date, time } = await searchParams;
 
-  const selectedDate = searchParams.date ? new Date(searchParams.date) : new Date();
+  const data = await getData(eventUrl, username);
+
+  const selectedDate = date ? new Date(date) : new Date();
 
   const formattedDate = new Intl.DateTimeFormat('vi-VN', {
     weekday: 'long',
@@ -62,7 +65,7 @@ export default async function BookingFormRoute({
     month: 'long',
   }).format(selectedDate);
 
-  const showForm = !!searchParams.date && searchParams.time;
+  const showForm = !!date && time;
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center">
@@ -111,15 +114,15 @@ export default async function BookingFormRoute({
             <Separator orientation="vertical" className="h-full w-[1px]" />
 
             <form className="flex flex-col gap-y-4" action={CreateMeetingAction}>
-              <input type="hidden" name="fromTime" value={searchParams.time} />
+              <input type="hidden" name="fromTime" value={time} />
 
-              <input type="hidden" name="eventDate" value={searchParams.date} />
+              <input type="hidden" name="eventDate" value={date} />
 
               <input type="hidden" name="meetingLength" value={data.duration} />
 
               <input type="hidden" name="provider" value={data.videoCallSoftware} />
 
-              <input type="hidden" name="username" value={params.username} />
+              <input type="hidden" name="username" value={username} />
 
               <input type="hidden" name="eventTypeId" value={data.id} />
 
@@ -193,7 +196,7 @@ export default async function BookingFormRoute({
 
             <TimeTable
               selectedDate={selectedDate}
-              userName={params.username}
+              userName={username}
               duration={data.duration}
             />
           </CardContent>

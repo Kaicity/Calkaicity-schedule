@@ -1,7 +1,6 @@
 import { type CalendarState } from 'react-stately';
 import { type AriaButtonProps } from '@react-aria/button';
 import type { FocusableElement, DOMAttributes } from '@react-types/shared';
-import { useDateFormatter } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { CalendarButton } from './CalendarButton';
 import { ChevronLeft, ChevronRight } from 'lucide-react';

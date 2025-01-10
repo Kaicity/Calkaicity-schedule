@@ -1,10 +1,7 @@
 'use client';
 
 import { useActionState, useState } from 'react';
-import {
-  CreateEventTypeAction,
-  EditEventTypeAction,
-} from '../services/eventTypeActions';
+import { EditEventTypeAction } from '../services/eventTypeActions';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { eventTypesSchema } from '../lib/zodSchemas';

@@ -3,7 +3,6 @@ import { TimeTable } from '@/app/components/bookingForm/TimeTable';
 import { SubmitButton } from '@/app/components/SubmitButton';
 import prisma from '@/app/lib/db';
 import { CreateMeetingAction } from '@/app/services/eventTypeActions';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

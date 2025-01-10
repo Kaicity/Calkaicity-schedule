@@ -45,7 +45,7 @@ export default async function MeetingRoute() {
   const session = await requireUser();
   const data = await getData(session.user?.id as string);
 
-  console.log(data.data[0]);
+  // console.log(data.data[0]);
 
   return (
     <div className="">

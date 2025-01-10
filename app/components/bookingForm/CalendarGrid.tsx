@@ -6,7 +6,6 @@ import {
 } from '@internationalized/date';
 import { CalendarState } from 'react-stately';
 import { CalendarCell } from './CalendarCell';
-import { DayBookingForm } from '@/app/utils/bookingDayFormEnum';
 
 export function CalendarGrid({
   state,

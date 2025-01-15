@@ -83,7 +83,10 @@ export default async function MeetingRoute() {
                 </CardHeader>
                 <CardContent>
                   {data.data
-                    .filter((item) => !item.conferencing.details)
+                    .filter((item) => {
+                      //  @ts-ignore
+                      !item.conferencing.details;
+                    })
                     .map((item) => (
                       <form action={cancelMeetingAction} key={item.id}>
                         <input type="hidden" name="eventId" value={item.id} />
@@ -147,7 +150,10 @@ export default async function MeetingRoute() {
                 </CardHeader>
                 <CardContent>
                   {data.data
-                    .filter((item) => item.conferencing.details)
+                    .filter((item) => {
+                      //  @ts-ignore
+                      item.conferencing.details;
+                    })
                     .map((item) => (
                       <form action={cancelMeetingAction} key={item.id}>
                         <input type="hidden" name="eventId" value={item.id} />

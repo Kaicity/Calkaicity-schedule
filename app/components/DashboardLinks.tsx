@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { CalendarCheck, HomeIcon, Settings, User2 } from 'lucide-react';
+import { CalendarCheck, HomeIcon, Kanban, Settings, User2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -33,6 +33,12 @@ export const dashboardLinks: iAppProps[] = [
   },
   {
     id: 3,
+    name: 'Kanban',
+    href: '/dashboard/kanban',
+    icon: Kanban,
+  },
+  {
+    id: 4,
     name: 'Cài đặt',
     href: '/dashboard/settings',
     icon: Settings,

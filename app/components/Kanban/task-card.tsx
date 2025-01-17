@@ -73,10 +73,10 @@ export function TaskCard({ task, isOverlay }: TaskCardProps) {
         <Badge variant={'outline'} className="ml-auto font-semibold">
           Task
         </Badge>
-        <TaskActions id={task.id} title={task.title} />
       </CardHeader>
       <CardContent className="whitespace-pre-wrap px-3 pb-6 pt-3 text-left">
-        {task.title}
+        {/* {task.title} */}
+        <TaskActions id={task.id} title={task.title} />
       </CardContent>
     </Card>
   );

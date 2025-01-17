@@ -53,7 +53,7 @@ export function ColumnActions({ title, id }: { title: string; id: UniqueIdentifi
       </form>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" className="ml-1">
+          <Button variant="secondary" className="ml-auto">
             <span className="sr-only">Actions</span>
             <Menu className="h-4 w-4" />
           </Button>

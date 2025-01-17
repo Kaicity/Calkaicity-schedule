@@ -7,12 +7,9 @@ export default async function KanbanRoute() {
 
   return (
     <div className="">
-      <div className="flex items-center justify-between w-[850px] mb-5">
-        <div className="hidden sm:grid gap-y-1">
-          <h1 className="text-3xl md:text-4xl font-semibold">Kanban</h1>
-          <p className="text-muted-foreground">Quản lý task của bạn</p>
-        </div>
-        <NewTaskDialog />
+      <div className="hidden sm:grid gap-y-1 mb-3">
+        <h1 className="text-3xl md:text-4xl font-semibold">Kanban</h1>
+        <p className="text-muted-foreground">Quản lý task của bạn</p>
       </div>
 
       <div className="space-y-4">

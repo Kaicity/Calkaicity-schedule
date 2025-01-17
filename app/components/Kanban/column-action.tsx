@@ -22,7 +22,7 @@ import { useTaskStore } from './utils/store';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { Menu } from 'lucide-react';
+import { Ellipsis } from 'lucide-react';
 
 export function ColumnActions({ title, id }: { title: string; id: UniqueIdentifier }) {
   const [open, setIsOpen] = React.useState(false);
@@ -55,7 +55,7 @@ export function ColumnActions({ title, id }: { title: string; id: UniqueIdentifi
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" className="ml-auto">
             <span className="sr-only">Actions</span>
-            <Menu className="h-4 w-4" />
+            <Ellipsis className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

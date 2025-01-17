@@ -22,6 +22,7 @@ import { toast } from 'sonner';
 import { Edit2Icon } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { SubmitButton } from '../SubmitButton';
+import { cn } from '@/lib/utils';
 
 export function TaskActions({ title, id }: { title: string; id: string }) {
   const [open, setIsOpen] = React.useState(false);
@@ -43,6 +44,41 @@ export function TaskActions({ title, id }: { title: string; id: string }) {
         }}
       >
         <div className="relative">
+          <div className="flex items-center justify-between mb-2">
+            <div className={cn(`w-[100px] h-2 bg-primary rounded-md`)}></div>
+
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="h-auto p-2 text-secondary-foreground/50 rounded-full"
+                >
+                  <span className="sr-only">Actions</span>
+                  <Edit2Icon className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center">
+                <DropdownMenuItem
+                  onSelect={() => {
+                    setIsEditDisable(!editDisable);
+                    setTimeout(() => {
+                      inputRef.current && inputRef.current?.focus();
+                    }, 500);
+                  }}
+                >
+                  Cập nhật
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onSelect={() => setShowDeleteDialog(true)}
+                  className="text-red-600"
+                >
+                  Xóa task
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
           <Textarea
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -64,33 +100,6 @@ export function TaskActions({ title, id }: { title: string; id: string }) {
               </Button>
             </div>
           )}
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="absolute top-0 right-0 mt-2 mr-2 h-auto p-2 text-secondary-foreground/50 rounded-full"
-              >
-                <span className="sr-only">Actions</span>
-                <Edit2Icon className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center">
-              <DropdownMenuItem
-                onSelect={() => {
-                  setIsEditDisable(!editDisable);
-                  setTimeout(() => {
-                    inputRef.current && inputRef.current?.focus();
-                  }, 500);
-                }}
-              >
-                Cập nhật
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => setShowDeleteDialog(true)} className="text-red-600">
-                Xóa task
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
       </form>
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>

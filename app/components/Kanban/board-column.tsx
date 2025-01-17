@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ColumnActions } from './column-action';
 import { TaskCard } from './task-card';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import NewTaskDialog from './new-task-dialog';
 
 export interface Column {
   id: UniqueIdentifier;
@@ -51,7 +52,7 @@ export function BoardColumn({ column, tasks, isOverlay }: BoardColumnProps) {
   };
 
   const variants = cva(
-    'h-[75vh] max-h-[75vh] w-[350px] max-w-full bg-secondary flex flex-col flex-shrink-0 snap-center',
+    'h-[75vh] max-h-max w-[350px] max-w-full bg-secondary flex flex-col flex-shrink-0 snap-center',
     {
       variants: {
         dragging: {
@@ -96,6 +97,7 @@ export function BoardColumn({ column, tasks, isOverlay }: BoardColumnProps) {
             ))}
           </SortableContext>
         </ScrollArea>
+        <NewTaskDialog />
       </CardContent>
     </Card>
   );

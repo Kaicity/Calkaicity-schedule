@@ -33,7 +33,10 @@ export default function NewTaskDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="sm">
+        <Button
+          className="w-full ring-1 ring-primary text-primary hover:text-primary/100"
+          variant={'outline'}
+        >
           ＋ Thêm task
         </Button>
       </DialogTrigger>

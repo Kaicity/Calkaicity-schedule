@@ -7,6 +7,7 @@ import { cva } from 'class-variance-authority';
 import { EllipsisVerticalIcon, GripVertical } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { TaskActions } from './task-action';
+import { cn } from '@/lib/utils';
 
 // export interface Task {
 //   id: UniqueIdentifier;
@@ -76,6 +77,7 @@ export function TaskCard({ task, isOverlay }: TaskCardProps) {
       </CardHeader>
       <CardContent className="whitespace-pre-wrap px-3 pb-6 pt-3 text-left">
         {/* {task.title} */}
+
         <TaskActions id={task.id} title={task.title} />
       </CardContent>
     </Card>

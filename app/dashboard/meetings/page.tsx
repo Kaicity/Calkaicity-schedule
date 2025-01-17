@@ -1,4 +1,5 @@
 import { EmptyState } from '@/app/components/EmptyState';
+import { PageContainer } from '@/app/components/PageContainer';
 import { SubmitButton } from '@/app/components/SubmitButton';
 import prisma from '@/app/lib/db';
 import { requireUser } from '@/app/lib/hooks';
@@ -83,10 +84,11 @@ export default async function MeetingRoute() {
                 </CardHeader>
                 <CardContent>
                   {data.data
-                    .filter((item) => {
-                      //  @ts-ignore
-                      !item.conferencing.details;
-                    })
+                    .filter(
+                      (item) =>
+                        //  @ts-ignore
+                        !item.conferencing.details,
+                    )
                     .map((item) => (
                       <form action={cancelMeetingAction} key={item.id}>
                         <input type="hidden" name="eventId" value={item.id} />
@@ -150,10 +152,11 @@ export default async function MeetingRoute() {
                 </CardHeader>
                 <CardContent>
                   {data.data
-                    .filter((item) => {
-                      //  @ts-ignore
-                      item.conferencing.details;
-                    })
+                    .filter(
+                      (item) =>
+                        //  @ts-ignore
+                        item.conferencing.details,
+                    )
                     .map((item) => (
                       <form action={cancelMeetingAction} key={item.id}>
                         <input type="hidden" name="eventId" value={item.id} />
@@ -202,6 +205,7 @@ export default async function MeetingRoute() {
                             className="w-fit flex ml-auto"
                           />
                         </div>
+
                         <Separator className="my-3" />
                       </form>
                     ))}

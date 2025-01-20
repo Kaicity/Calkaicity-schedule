@@ -8,10 +8,7 @@ import { redirect } from 'next/navigation';
 import { nylas } from '../lib/nylas';
 import { revalidatePath } from 'next/cache';
 
-export async function CreateEventTypeAction(
-  prevState: any,
-  formData: FormData,
-) {
+export async function CreateEventTypeAction(prevState: any, formData: FormData) {
   const session = await requireUser();
 
   const submission = parseWithZod(formData, {
@@ -85,7 +82,9 @@ export async function CreateMeetingAction(formData: FormData) {
         endTime: Math.floor(endDateTime.getTime() / 1000),
       },
       conferencing: {
-        autocreate: {},
+        autocreate: {
+          conf_grant_id: getUserData.grantId,
+        },
         provider: provider as any,
         // provider: 'Google Meet',
       },

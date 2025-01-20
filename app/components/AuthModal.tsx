@@ -5,8 +5,8 @@ import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import Image from 'next/image';
 import Logo from '@/public/logo.png';
-import { SignInGithub, SignInGoogle } from '../lib/auth-action';
-import { GithubAuthButton, GoogleAuthButton } from './SubmitButton';
+import { SignInGithub, SignInGoogle, SignInZoom } from '../lib/auth-action';
+import { GithubAuthButton, GoogleAuthButton, ZoomAuthButton } from './SubmitButton';
 
 export function AuthModal() {
   return (
@@ -32,6 +32,11 @@ export function AuthModal() {
           {/* Đăng nhập với Github */}
           <form className="w-full" action={() => SignInGithub()}>
             <GithubAuthButton />
+          </form>
+
+          {/* Đăng nhập với Zoom */}
+          <form className="w-full" action={() => SignInZoom()}>
+            <ZoomAuthButton />
           </form>
         </div>
       </DialogContent>

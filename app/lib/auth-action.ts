@@ -10,6 +10,10 @@ export async function SignInGithub() {
   return await signIn('github');
 }
 
+export async function SignInZoom() {
+  return await signIn('zoom');
+}
+
 export async function SignOut() {
   return await signOut();
 }

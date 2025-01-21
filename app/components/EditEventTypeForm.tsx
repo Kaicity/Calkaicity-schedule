@@ -33,8 +33,9 @@ import GoogleMeetIcon from '../../public/meet.png';
 import MicrosoftTeamsIcon from '../../public/teams.png';
 import Link from 'next/link';
 import { SubmitButton } from './SubmitButton';
+import { Checkbox } from '@/components/ui/checkbox';
 
-type VideoCallProvider = 'Zoom Meeting' | 'Google Meet' | 'Microsoft Teams';
+type VideoCallProvider = 'Zoom Meeting' | 'Google Meet' | 'Microsoft Teams' | 'NULL';
 
 interface isAppProps {
   id: string;
@@ -71,14 +72,20 @@ export function EditEventForm({
     shouldRevalidate: 'onInput',
   });
 
+  const [isUseVideoCheck, setIsUseVideoCheck] = useState(false);
+
+  const handleCheckboxChange = (checked: boolean) => {
+    setIsUseVideoCheck(checked);
+
+    !checked ? setActivePlatform('NULL') : setActivePlatform('Google Meet');
+  };
+
   return (
     <div className="max-w-screen-2xl h-full flex flex-1 items-center justify-center">
       <Card>
         <CardHeader>
           <CardTitle>Chỉnh sửa sự kiện</CardTitle>
-          <CardDescription>
-            Chỉnh sửa thông tin cuộc hẹn của bạn
-          </CardDescription>
+          <CardDescription>Chỉnh sửa thông tin cuộc hẹn của bạn</CardDescription>
         </CardHeader>
         <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
           <input type="hidden" name="id" value={id} />
@@ -119,9 +126,7 @@ export function EditEventForm({
                 key={fields.description.key}
                 defaultValue={description}
               />
-              <div className="text-red-500 text-sm">
-                {fields.description.errors}
-              </div>
+              <div className="text-red-500 text-sm">{fields.description.errors}</div>
             </div>
 
             <div className="flex flex-col gap-y-2">
@@ -140,66 +145,67 @@ export function EditEventForm({
                     <SelectItem value="15">15 Phút</SelectItem>
                     <SelectItem value="30">30 Phút</SelectItem>
                     <SelectItem value="45">45 Phút</SelectItem>
-                    <SelectItem value="60">Một giờ</SelectItem>
+                    <SelectItem value="60">1 giờ</SelectItem>
+                    <SelectItem value="90">1 giờ 30 phút</SelectItem>
+                    <SelectItem value="120">2 giờ</SelectItem>
+                    <SelectItem value="150">2 giờ 30 phút</SelectItem>
+                    <SelectItem value="180">3 giờ</SelectItem>
+                    <SelectItem value="210">3 giờ 30 phút</SelectItem>
+                    <SelectItem value="240">4 giờ</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <div className="text-red-500 text-sm">
-                {fields.duration.errors}
+              <div className="text-red-500 text-sm">{fields.duration.errors}</div>
+            </div>
+
+            <div className="flex flex-col gap-y-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox checked={isUseVideoCheck} onCheckedChange={handleCheckboxChange} />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Cho phép sự kiện thuộc cuộc họp video
+                </label>
               </div>
             </div>
 
             <div className="flex flex-col gap-y-2">
               <Label>Trình cung cấp cuộc gọi video</Label>
-              <Input
-                type="hidden"
-                name={fields.videoCallSoftware.name}
-                value={activePlatform}
-              />
+              <Input type="hidden" name={fields.videoCallSoftware.name} value={activePlatform} />
               <ButtonGroup>
                 <Button
+                  disabled={!isUseVideoCheck}
                   type="button"
                   onClick={() => setActivePlatform('Zoom Meeting')}
                   className="w-full"
-                  variant={
-                    activePlatform === 'Zoom Meeting' ? 'secondary' : 'outline'
-                  }
+                  variant={activePlatform === 'Zoom Meeting' ? 'secondary' : 'outline'}
                 >
                   <Image src={ZoomIcon} alt="" className="size-4 mr-2" />
                   Zoom
                 </Button>
                 <Button
+                  disabled={!isUseVideoCheck}
                   type="button"
                   onClick={() => setActivePlatform('Google Meet')}
                   className="w-full"
-                  variant={
-                    activePlatform === 'Google Meet' ? 'secondary' : 'outline'
-                  }
+                  variant={activePlatform === 'Google Meet' ? 'secondary' : 'outline'}
                 >
                   <Image src={GoogleMeetIcon} alt="" className="size-4 mr-2" />
                   Google Meet
                 </Button>
                 <Button
+                  disabled={!isUseVideoCheck}
                   type="button"
                   onClick={() => setActivePlatform('Microsoft Teams')}
                   className="w-full"
-                  variant={
-                    activePlatform === 'Microsoft Teams'
-                      ? 'secondary'
-                      : 'outline'
-                  }
+                  variant={activePlatform === 'Microsoft Teams' ? 'secondary' : 'outline'}
                 >
-                  <Image
-                    src={MicrosoftTeamsIcon}
-                    alt=""
-                    className="size-4 mr-2"
-                  />
+                  <Image src={MicrosoftTeamsIcon} alt="" className="size-4 mr-2" />
                   Microsoft Teams
                 </Button>
               </ButtonGroup>
-              <div className="text-red-500 text-sm">
-                {fields.videoCallSoftware.errors}
-              </div>
+              <div className="text-red-500 text-sm">{fields.videoCallSoftware.errors}</div>
             </div>
           </CardContent>
           <CardFooter className="flex items-center justify-between">

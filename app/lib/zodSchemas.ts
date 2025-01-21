@@ -13,8 +13,7 @@ export const onboardingSchema = z.object({
     .min(3, { message: 'Username phải có ít nhất 3 kí tự ' })
     .max(150, { message: 'Username không được vượt quá 150 kí tự ' })
     .regex(/^[a-z0-9-]+$/, {
-      message:
-        'Username chỉ cho phép các kí tự thường, chữ số và dấu gạch ngang ',
+      message: 'Username chỉ cho phép các kí tự thường, chữ số và dấu gạch ngang ',
     }),
 
   phone: z
@@ -24,17 +23,14 @@ export const onboardingSchema = z.object({
     .max(11, { message: 'Số điện thoại không được vượt quá 11 kí tự ' }),
 });
 
-export function onboardingSchemaValidation(options?: {
-  isUsernameUnique: () => Promise<boolean>;
-}) {
+export function onboardingSchemaValidation(options?: { isUsernameUnique: () => Promise<boolean> }) {
   return z.object({
     userName: z
       .string({ message: 'Username là bắt buộc ' })
       .min(3, { message: 'Username phải có ít nhất 3 kí tự ' })
       .max(150, { message: 'Username không được vượt quá 150 kí tự ' })
       .regex(/^[a-z0-9-]+$/, {
-        message:
-          'Username chỉ cho phép các kí tự thường, chữ số và dấu gạch ngang ',
+        message: 'Username chỉ cho phép các kí tự thường, chữ số và dấu gạch ngang ',
       })
       .pipe(
         z.string().superRefine((_, ctx) => {
@@ -97,7 +93,7 @@ export const eventTypesSchema = z.object({
   duration: z
     .number({ message: 'Khoảng thời gian là bắt buộc' })
     .min(15, { message: 'Khoảng thời gian phải có ít nhất 3 kí tự' })
-    .max(60, { message: 'Khoảng thời gian không được vượt quá 60 kí tự' }),
+    .max(240, { message: 'Khoảng thời gian không được vượt quá 60 kí tự' }),
   url: z
     .string({ message: 'Đường dẫn là bắt buộc' })
     .min(3, { message: 'Đường dẫn phải có ít nhất 3 kí tự' })
@@ -106,7 +102,7 @@ export const eventTypesSchema = z.object({
     .string({ message: 'Mô tả là bắt buộc' })
     .min(3, { message: 'Mô tả phải có ít nhất 3 kí tự' })
     .max(300, { message: 'Mô tả không được vượt quá 300 kí tự' }),
-  videoCallSoftware: z
-    .string({ message: 'Trình cấp video call là bắt buộc' })
-    .min(3, { message: 'Trình cấp video call phải có ít nhất 3 kí tự' }),
+  videoCallSoftware: z.string().optional(),
+  //   .string({ message: 'Trình cấp video call là bắt buộc' })
+  //   .min(3, { message: 'Trình cấp video call phải có ít nhất 3 kí tự' }),
 });

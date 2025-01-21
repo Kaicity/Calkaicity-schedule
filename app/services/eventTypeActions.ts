@@ -65,8 +65,6 @@ export async function CreateMeetingAction(formData: FormData) {
   const meetingLength = Number(formData.get('meetingLength'));
   const provider = formData.get('provider') as string;
 
-  console.log(fromTime);
-
   const startDateTime = new Date(`${eventDate}T${fromTime}:00`);
   // startDateTime.setHours(startDateTime.getHours() + 7); // Gio UTC + 7 VIET NAM
 
@@ -82,9 +80,7 @@ export async function CreateMeetingAction(formData: FormData) {
         endTime: Math.floor(endDateTime.getTime() / 1000),
       },
       conferencing: {
-        autocreate: {
-          conf_grant_id: getUserData.grantId,
-        },
+        autocreate: {},
         provider: provider as any,
         // provider: 'Google Meet',
       },
@@ -101,6 +97,31 @@ export async function CreateMeetingAction(formData: FormData) {
       notifyParticipants: true,
     },
   });
+
+  if (provider === 'NULL') {
+    await nylas.events.create({
+      identifier: getUserData?.grantId as string,
+      requestBody: {
+        title: eventTypeData?.title,
+        description: eventTypeData?.description,
+        when: {
+          startTime: Math.floor(startDateTime.getTime() / 1000),
+          endTime: Math.floor(endDateTime.getTime() / 1000),
+        },
+        participants: [
+          {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            status: 'yes',
+          },
+        ],
+      },
+      queryParams: {
+        calendarId: getUserData?.grantEmail as string,
+        notifyParticipants: true,
+      },
+    });
+  }
 
   return redirect(`/success`);
 }

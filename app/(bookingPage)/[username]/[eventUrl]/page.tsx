@@ -80,20 +80,14 @@ export default async function BookingFormRoute({
                 height={64}
                 className="size-10 rounded-full"
               />
-              <p className="text-sm font-medium text-muted-foreground mt-1">
-                {data?.user.name}
-              </p>
+              <p className="text-sm font-medium text-muted-foreground mt-1">{data?.user.name}</p>
               <h1 className="text-xl font-semibold mt-2">{data?.title}</h1>
-              <p className="text-sm font-medium text-muted-foreground">
-                {data?.description}
-              </p>
+              <p className="text-sm font-medium text-muted-foreground">{data?.description}</p>
 
               <div className="mt-5 flex flex-col gap-y-3">
                 <p className="flex items-center">
                   <CalendarX2 className="size-4 mr-2 text-primary" />
-                  <span className="text-sm font-medium text-muted-foreground">
-                    {formattedDate}
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">{formattedDate}</span>
                 </p>
 
                 <p className="flex items-center">
@@ -127,18 +121,13 @@ export default async function BookingFormRoute({
               <input type="hidden" name="eventTypeId" value={data.id} />
 
               <div className="flex flex-col gap-y-2">
-                <Label>Tên của bạn</Label>
+                <Label>Tên người tham gia</Label>
                 <Input required name="name" placeholder="Tên của bạn" />
               </div>
 
               <div className="flex flex-col gap-y-2">
-                <Label>Email của bạn</Label>
-                <Input
-                  required
-                  type="email"
-                  name="email"
-                  placeholder="nguyenvana@gmail.com"
-                />
+                <Label>Email người tham gia</Label>
+                <Input required type="email" name="email" placeholder="nguyenvana@gmail.com" />
               </div>
 
               <SubmitButton text="Đặt lịch hẹn" className="w-full mt-5" />
@@ -156,20 +145,14 @@ export default async function BookingFormRoute({
                 height={64}
                 className="size-10 rounded-full"
               />
-              <p className="text-sm font-medium text-muted-foreground mt-1">
-                {data?.user.name}
-              </p>
+              <p className="text-sm font-medium text-muted-foreground mt-1">{data?.user.name}</p>
               <h1 className="text-xl font-semibold mt-2">{data?.title}</h1>
-              <p className="text-sm font-medium text-muted-foreground">
-                {data?.description}
-              </p>
+              <p className="text-sm font-medium text-muted-foreground">{data?.description}</p>
 
               <div className="mt-5 flex flex-col gap-y-3">
                 <p className="flex items-center">
                   <CalendarX2 className="size-4 mr-2 text-primary" />
-                  <span className="text-sm font-medium text-muted-foreground">
-                    {formattedDate}
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">{formattedDate}</span>
                 </p>
 
                 <p className="flex items-center">
@@ -194,11 +177,7 @@ export default async function BookingFormRoute({
 
             <Separator orientation="vertical" className="h-full w-[1px]" />
 
-            <TimeTable
-              selectedDate={selectedDate}
-              userName={username}
-              duration={data.duration}
-            />
+            <TimeTable selectedDate={selectedDate} userName={username} duration={data.duration} />
           </CardContent>
         </Card>
       )}

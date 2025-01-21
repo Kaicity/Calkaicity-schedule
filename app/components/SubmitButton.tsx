@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useFormStatus } from 'react-dom';
 import GoogleIcon from '@/public/google.png';
 import GithubIcon from '@/public/github-dark.png';
+import ZoomIcon from '@/public/zoom.png';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -94,6 +95,26 @@ export function GithubAuthButton() {
         <Button variant="outline" className="w-full">
           Đăng nhập với Github
           <Image src={GithubIcon} alt="" className="size-4 mr-2" />
+        </Button>
+      )}
+    </>
+  );
+}
+
+export function ZoomAuthButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      {pending ? (
+        <Button disabled className="w-full">
+          <Loader2 className="size-4 mr-2 animate-spin" />
+          Chờ xử lý
+        </Button>
+      ) : (
+        <Button variant="outline" className="w-full">
+          Đăng nhập với Zoom
+          <Image src={ZoomIcon} alt="" className="size-4 mr-2" />
         </Button>
       )}
     </>

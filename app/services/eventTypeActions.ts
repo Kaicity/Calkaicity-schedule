@@ -70,34 +70,6 @@ export async function CreateMeetingAction(formData: FormData) {
 
   const endDateTime = new Date(startDateTime.getTime() + meetingLength * 60000);
 
-  await nylas.events.create({
-    identifier: getUserData?.grantId as string,
-    requestBody: {
-      title: eventTypeData?.title,
-      description: eventTypeData?.description,
-      when: {
-        startTime: Math.floor(startDateTime.getTime() / 1000),
-        endTime: Math.floor(endDateTime.getTime() / 1000),
-      },
-      conferencing: {
-        autocreate: {},
-        provider: provider as any,
-        // provider: 'Google Meet',
-      },
-      participants: [
-        {
-          name: formData.get('name') as string,
-          email: formData.get('email') as string,
-          status: 'yes',
-        },
-      ],
-    },
-    queryParams: {
-      calendarId: getUserData?.grantEmail as string,
-      notifyParticipants: true,
-    },
-  });
-
   if (provider === 'NULL') {
     await nylas.events.create({
       identifier: getUserData?.grantId as string,
@@ -107,6 +79,35 @@ export async function CreateMeetingAction(formData: FormData) {
         when: {
           startTime: Math.floor(startDateTime.getTime() / 1000),
           endTime: Math.floor(endDateTime.getTime() / 1000),
+          timezone: 'Asia/Ho_Chi_Minh',
+        },
+        participants: [
+          {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            status: 'yes',
+          },
+        ],
+      },
+      queryParams: {
+        calendarId: getUserData?.grantEmail as string,
+        notifyParticipants: true,
+      },
+    });
+  } else {
+    await nylas.events.create({
+      identifier: getUserData?.grantId as string,
+      requestBody: {
+        title: eventTypeData?.title,
+        description: eventTypeData?.description,
+        when: {
+          startTime: Math.floor(startDateTime.getTime() / 1000),
+          endTime: Math.floor(endDateTime.getTime() / 1000),
+        },
+        conferencing: {
+          autocreate: {},
+          provider: provider as any,
+          // provider: 'Google Meet',
         },
         participants: [
           {

@@ -1,5 +1,4 @@
 import { CalendarX } from '@/app/components/calendarSchedule/CalendarSchedule';
-import { NewCalendar } from '@/app/components/calendarSchedule/NewCalendar';
 
 import prisma from '@/app/lib/db';
 import { requireUser } from '@/app/lib/hooks';
@@ -46,8 +45,11 @@ export default async function CalendarRoute() {
 
   return (
     <div className="">
-      <div className="flex justify-end mb-3">
-        <NewCalendar />
+      <div className="flex flex-col gap-y-2 mb-3">
+        <h1 className="text-3xl md:text-4xl font-semibold">Lịch trình công việc</h1>
+        <p className="text-sm text-muted-foreground">
+          Các lịch trình của bạn sẽ được hiển thị ở đây
+        </p>
       </div>
       <CalendarX events={events} />
     </div>
